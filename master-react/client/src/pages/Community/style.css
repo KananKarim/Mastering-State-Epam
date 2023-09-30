@@ -1,0 +1,10 @@
+.hide-sec{
+    padding: 10px;
+    border: 2px solid red;
+    color: red;
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    top: 40px;
+    font-weight: 700;
+}

@@ -1,0 +1,12 @@
+.join-us{
+    background-image: url("../../assets/bc.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1.3rem;
+}
