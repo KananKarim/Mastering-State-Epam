@@ -3,12 +3,17 @@ import Subtitle from "../../components/Subtitle";
 import Cards from "../../components/Cards";
 import { useState } from "react";
 import "./style.css"
+import { useSelector,useDispatch } from "react-redux";
+import { toggleShow } from "../../features/sectionSlice";
 
 const Community = () => {
-  const [showSec, setShowSec] = useState(true);
+  // const [showSec, setShowSec] = useState(true);
+
+  const showSec = useSelector((state) => state.section.show)
+  const dispatch = useDispatch()
 
   function handleSec() {
-    setShowSec((prev) => !prev);
+    dispatch(toggleShow())
   }
 
   return (

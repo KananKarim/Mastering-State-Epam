@@ -1,10 +1,15 @@
 import { useState } from "react";
 import "./style.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleSubscription } from "../../features/subscribeSlice";
 
 const Form = () => {
   const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
+  // const [subscribed, setSubscribed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useDispatch()
+  const subscribed = useSelector((state) => state.subscribe.subscribed)
 
   const handleSubs = () => {
     if (email === "forbidden@gmail.com") {
@@ -37,7 +42,7 @@ const Form = () => {
         const errorData = await response.json();
         alert(errorData.error);
       } else if (response.ok) {
-        setSubscribed(!subscribed);
+        dispatch(toggleSubscription());
       } else {
         alert("An error occurred.");
       }

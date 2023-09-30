@@ -1,10 +1,12 @@
-import { useContext } from "react";
-import { MyContext } from "../../context/GlobalState";
+// import{ useContext } from "react";
+// import { MyContext } from "../../context/GlobalState"; 
 import Card from "../Card";
 import "./style.css"
+import { useSelector } from "react-redux";
 
 const Cards = () => {
-    const {data} = useContext(MyContext);
+    const data = useSelector((state) => state.user.data)
+    console.log(data);
     return ( 
         <div className="cards">
             {
