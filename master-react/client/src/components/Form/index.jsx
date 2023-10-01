@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./style.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSubscription } from "../../features/subscribeSlice";
+import { subscribeEmail } from "../../thunk/subscribeThunk";
 
 const Form = () => {
   const [email, setEmail] = useState("");
@@ -16,42 +17,11 @@ const Form = () => {
       alert("Email is not allowed.");
       return;
     }
-
+  
     if (email.includes("@") && email.includes("gmail.com")) {
-      fetchData();
+      dispatch(subscribeEmail({email,subscribed}));
     } else {
       alert("Invalid email format.")
-    }
-  };
-
-  const fetchData = async () => {
-    try {
-      if (isLoading) return;
-      setIsLoading(true);
-
-      const endpoint = subscribed ? "unsubscribe" : "subscribe";
-      const response = await fetch(`http://localhost:3000/${endpoint}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      if (response.status === 422) {
-        const errorData = await response.json();
-        alert(errorData.error);
-      } else if (response.ok) {
-        dispatch(toggleSubscription());
-      } else {
-        alert("An error occurred.");
-      }
-
-      alert(`${subscribed ? "unsubscribed" : "subscribed"}`)
-    } catch (error) {
-      console.error("Error:", error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
